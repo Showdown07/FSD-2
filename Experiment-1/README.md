@@ -1,24 +1,20 @@
-# React + Vite
+**Routing** Routing is used to navigate between different pages or components in the application without reloading the page.
+BrowserRouter manages the routing logic and keeps the UI synced with the URL.
+Routes acts as a container for all defined application routes.
+Route links a specific URL path to the component that should be rendered.
+Link enables seamless navigation between routes without triggering a full page reload.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 
 ## Learning Outcomes
+FOR exp-3 lo: -
+-Understand the concept of client-side routing in React applications.
+-Learn how to define and manage routes using React Router.
+-Gain the ability to navigate between pages using Link without page reloads.
+-Understand how URLs map to specific components in a React app.
+-Develop structured, multi-page React applications using routing.
+-After completing this experiment you should be able to:
 
-After completing this experiment you should be able to:
-
+For Exp-1
 - **Understand SPA basics:** Explain what a Single Page Application is and how client-side routing works.
 - **Use React Router:** Set up routing with `react-router-dom` and create navigable views/components.
 - **Wire up Vite + React:** Start the dev server, interpret error messages, and fix common import/path issues.
@@ -32,3 +28,4 @@ After completing this experiment you should be able to:
 - **Initial load & caching:** **SPA:** larger initial bundle, subsequent navigation is fast; caching strategies differ. **MPA:** smaller page payloads per route, leverage standard browser caching per page.
 - **SEO & indexability:** **SPA:** requires server-side rendering (SSR) or pre-rendering for best SEO. **MPA:** naturally SEO-friendly because each page is separate HTML.
 - **Complexity & use cases:** **SPA:** better for interactive single-page apps (dashboards, SPAs). **MPA:** suited for content sites or simpler multi-page websites.
+
