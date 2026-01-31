@@ -1,16 +1,68 @@
-# React + Vite
+# 📌 State Management in React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📖 What is State Management?
 
-Currently, two official plugins are available:
+State Management is the process of handling and controlling application data (state) so that the UI updates correctly based on user actions and events.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🧩 Local State
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Local State is state that is managed **within a single component** using React hooks like `useState`.
 
-## Expanding the ESLint configuration
+**Key Points:**
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Scoped to one component  
+- Simple and easy to use  
+- Not shared across components  
+
+**Example Use Case:**  
+Form inputs, local counters, toggles
+
+---
+
+## 🌐 Global State
+
+Global State is state that needs to be **shared across multiple components** in an application.
+
+---
+
+### 🔹 Context API
+
+Context API is a **built-in React feature** used to manage and share global state without prop drilling.
+
+**Key Points:**
+
+- Avoids passing props through multiple component levels  
+- Suitable for small to medium-sized applications  
+- Easy to implement and maintain  
+
+**Example Use Case:**  
+Theme management, authentication state, global counters
+
+---
+
+### 🔹 Redux (Library)
+
+Redux is a **state management library** used for large and complex React applications.
+
+**Key Points:**
+
+- Centralized store for the entire application  
+- Predictable state updates using reducers  
+- Highly scalable and easier to debug  
+
+**Example Use Case:**  
+Applications with complex data flow and multiple shared states
+
+---
+
+## 🎯 Learning Outcomes
+
+1. Understood the concept of **State Management** in React.  
+2. Learned the difference between **Local State and Global State**.  
+3. Implemented **Context API** for global state management.  
+4. Implemented **Redux** for centralized state management.  
+5. Compared **Local State, Context API, and Redux** to identify appropriate use cases.
+
+--- 
