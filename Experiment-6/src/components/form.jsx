@@ -1,4 +1,4 @@
-import {TextField, Button, Container, Typography, Radio, RadioGroup, FormControl, FormControlLabel, FormLabel, Checkbox} from '@mui/material'
+import { TextField, Button, Container, Typography, Radio, RadioGroup, FormControl, FormControlLabel, FormLabel, Checkbox } from '@mui/material'
 import { useState } from 'react'
 
 export default function Form() {
@@ -8,14 +8,22 @@ export default function Form() {
 
   const validate = () => {
     const temp = {}
-    if (password.length < 6) temp.password = 'Min 6 characters'
+
+    if (!email) temp.email = 'Email is required'
+    else if (!/\S+@\S+\.\S+/.test(email))
+      temp.email = 'Invalid email format'
+
+    if (!password) temp.password = 'Password is required'
+    else if (password.length < 6)
+      temp.password = 'Minimum 6 characters'
+
     setErrors(temp)
     return Object.keys(temp).length === 0
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (e.target.checkValidity() && validate()) {
+    if (validate()) {
       alert('Form submitted successfully')
       console.log('Form submitted successfully')
     }
@@ -25,12 +33,10 @@ export default function Form() {
     <Container maxWidth="sm">
       <Typography variant="h5" gutterBottom>Login Form</Typography>
 
-      <form onSubmit={handleSubmit} noValidate>
+      <form onSubmit={handleSubmit}>
         <TextField
-          type="email"
           label="Email"
           value={email}
-          required
           fullWidth
           margin="normal"
           onChange={(e) => setEmail(e.target.value)}
@@ -39,20 +45,18 @@ export default function Form() {
         />
 
         <TextField
-          type="password"
           label="Password"
+          type="password"
           value={password}
-          required
           fullWidth
           margin="normal"
           onChange={(e) => setPassword(e.target.value)}
           error={Boolean(errors.password)}
           helperText={errors.password}
-          inputProps={{ minLength: 6 }}
         />
 
         <FormControlLabel
-          control={<Checkbox defaultChecked={false} />}
+          control={<Checkbox />}
           label="Remember me"
         />
 
@@ -64,7 +68,9 @@ export default function Form() {
           </RadioGroup>
         </FormControl>
 
-        <Button variant="contained" type="submit">Login</Button>
+        <Button variant="contained" type="submit">
+          Login
+        </Button>
       </form>
     </Container>
   )
