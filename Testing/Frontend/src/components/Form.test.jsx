@@ -1,3 +1,4 @@
+import React from "react";
 import { render, screen, fireEvent, cleanup } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import Form from "./form";
@@ -13,7 +14,7 @@ describe("Login Form Component", () => {
   });
 
   it("RENDERS email and password fields", () => {
-    render(<Form />);
+    render(<Form/>);
 
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
