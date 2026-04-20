@@ -86,6 +86,14 @@ The GitHub Actions workflow is configured in `.github/workflows/ci.yml`.
 
 ![Frontend Terminal Run](../docs/screenshots/frontend-terminal-run.png)
 
+### GitHub Actions Backend Job
+
+![GitHub Actions Backend Job](../docs/screenshots/github-actions-backend-job.png)
+
+### GitHub Actions Frontend Job
+
+![GitHub Actions Frontend Job](../docs/screenshots/github-actions-frontend-job.png)
+
 ## Expected Outcome
 
 - backend tests pass with `pytest`
