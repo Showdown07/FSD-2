@@ -1,68 +1,125 @@
-# 📌 State Management in React
+# Full Stack Testing Workflow
 
-## 📖 What is State Management?
+This repository contains a small full stack testing setup with:
 
-State Management is the process of handling and controlling application data (state) so that the UI updates correctly based on user actions and events.
+- a Flask backend that exposes student CRUD APIs
+- a React + Vite frontend that renders a login form
+- backend and frontend automated tests
+- a GitHub Actions workflow that runs both test suites
 
----
+## Project Structure
 
-## 🧩 Local State
+- `Testing/Backend` contains the Flask app, student routes, and `pytest` test cases.
+- `Testing/Frontend` contains the React form app, Vitest configuration, and component tests.
+- `.github/workflows/ci.yml` contains the CI workflow for backend and frontend test execution.
 
-Local State is state that is managed **within a single component** using React hooks like `useState`.
+## Backend Work Completed
 
-**Key Points:**
+The backend test setup covers a simple student management API built with Flask.
 
-- Scoped to one component  
-- Simple and easy to use  
-- Not shared across components  
+### Backend Features
 
-**Example Use Case:**  
-Form inputs, local counters, toggles
+- Flask application factory in `Testing/Backend/app.py`
+- student routes grouped with a Flask blueprint in `Testing/Backend/routes/student_routes.py`
+- in-memory CRUD operations for students
+- root health-style route returning a backend status message
 
----
+### Backend Testing
 
-## 🌐 Global State
+The backend tests are written with `pytest` in `Testing/Backend/test_app.py`.
 
-Global State is state that needs to be **shared across multiple components** in an application.
+Covered test cases:
 
----
+- create a student with `POST /students`
+- fetch all students with `GET /students`
+- fetch a single student with `GET /students/<id>`
+- update a student with `PUT /students/<id>`
+- delete a student with `DELETE /students/<id>`
 
-### 🔹 Context API
+### Backend Run Commands
 
-Context API is a **built-in React feature** used to manage and share global state without prop drilling.
+```bash
+cd Testing/Backend
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+pytest
+```
 
-**Key Points:**
+## Frontend Work Completed
 
-- Avoids passing props through multiple component levels  
-- Suitable for small to medium-sized applications  
-- Easy to implement and maintain  
+The frontend test setup uses React, Vite, Material UI, Testing Library, and Vitest.
 
-**Example Use Case:**  
-Theme management, authentication state, global counters
+### Frontend Features
 
----
+- login form component in `Testing/Frontend/src/components/form.jsx`
+- controlled email and password inputs
+- client-side validation for required fields
+- email format validation
+- minimum password length validation
+- success alert on valid submission
+- Material UI components for form layout and controls
 
-### 🔹 Redux (Library)
+### Frontend Testing
 
-Redux is a **state management library** used for large and complex React applications.
+The frontend component tests are in `Testing/Frontend/src/components/Form.test.jsx`.
 
-**Key Points:**
+Covered test cases:
 
-- Centralized store for the entire application  
-- Predictable state updates using reducers  
-- Highly scalable and easier to debug  
+- rendering the email field, password field, and login button
+- showing a validation error for a short password
+- successful submission with valid credentials
 
-**Example Use Case:**  
-Applications with complex data flow and multiple shared states
+### Frontend Run Commands
 
----
+```bash
+cd Testing/Frontend
+npm ci
+npm test
+```
 
-## 🎯 Learning Outcomes
+## CI Workflow Work Completed
 
-1. Understood the concept of **State Management** in React.  
-2. Learned the difference between **Local State and Global State**.  
-3. Implemented **Context API** for global state management.  
-4. Implemented **Redux** for centralized state management.  
-5. Compared **Local State, Context API, and Redux** to identify appropriate use cases.
+The GitHub Actions workflow runs backend and frontend tests automatically on push and pull request events.
 
---- 
+### CI Fixes Applied
+
+- updated the frontend workflow runtime to Node `20`
+- changed frontend dependency installation from `npm install` to `npm ci`
+- removed the Vitest inline dependency override that was pulling the wrong encoding dependency chain
+- fixed malformed JSON in `Testing/package.json`
+- pinned the frontend encoding dependency path using `overrides` so CI installs remain stable
+
+### Current Workflow File
+
+- `.github/workflows/ci.yml`
+
+## Workflow Screenshots
+
+Add workflow screenshots to `docs/screenshots/` and then keep the filenames below so they render automatically in this README.
+
+Suggested filenames:
+
+- `backend-workflow-success.png`
+- `frontend-workflow-success.png`
+- `frontend-workflow-error.png`
+
+When the images are available, uncomment and keep the matching entries below:
+
+```md
+![Backend Workflow Success](docs/screenshots/backend-workflow-success.png)
+![Frontend Workflow Success](docs/screenshots/frontend-workflow-success.png)
+![Frontend Workflow Error](docs/screenshots/frontend-workflow-error.png)
+```
+
+## Expected Results
+
+- backend tests should pass through `pytest`
+- frontend tests should pass through `vitest`
+- GitHub Actions should run both jobs from the `Testing/Backend` and `Testing/Frontend` directories
+
+## Notes
+
+- the backend currently uses in-memory storage, so data resets when the app restarts
+- the frontend tests run in a `jsdom` environment
+- the CI configuration is designed to keep frontend dependency resolution consistent with the checked-in lockfile
