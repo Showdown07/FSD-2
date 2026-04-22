@@ -1,43 +1,44 @@
-# Experiment 20: Implement CI/CD pipeline for application deployment
+# Experiment 20: Implement CI/CD Pipeline for Application Deployment
 
-This folder contains the files added for Experiment 20.
+This folder contains the Docker and documentation files added for Experiment 20.
 
 ## Purpose
 
-Experiment 20 extends the existing `Testing` module by adding Docker-based deployment and a CI/CD workflow with GitHub Actions.
+Experiment 20 extends the existing `Testing` module by adding Docker-based containerization and a CI/CD workflow with GitHub Actions.
 
 ## Files In This Folder
 
-- `Dockerfile` builds the backend application by using `Testing/Backend`
-- `frontend.Dockerfile` builds the frontend application by using `Testing/Frontend`
-- `README.md` documents the Docker and GitHub Actions setup for this experiment
+- `backend.Dockerfile` builds the Flask backend by using `Testing/Backend`
+- `frontend.Dockerfile` builds the React frontend by using `Testing/Frontend`
+- `README.md` explains the Docker and GitHub Actions steps for this experiment
+- `Screenshots/` stores the proof screenshots collected during execution
 
-## Existing Project Used
+## Project Modules Used
 
-This experiment uses the already prepared project inside:
-
-- `Testing/Backend` for Flask backend tests and deployment
-- `Testing/Frontend` for React frontend tests and deployment
+- `Testing/Backend` contains the Flask backend, routes, and pytest tests
+- `Testing/Frontend` contains the React frontend and Vitest tests
+- `.github/workflows/ci.yml` contains the GitHub Actions CI/CD pipeline
 
 ## Backend Docker Commands
 
-```bash
+```powershell
 cd D:\Theory\FS1\FSD-2
-docker build -f Exp20/Dockerfile -t testing-backend .
+docker build -f Exp20/backend.Dockerfile -t testing-backend .
 docker rm -f testing-backend-container
 docker run -d --name testing-backend-container -p 5000:5000 testing-backend
 docker ps
+Invoke-RestMethod http://127.0.0.1:5000/
 ```
 
-Verify backend:
+Expected backend response:
 
-```bash
-Invoke-RestMethod http://127.0.0.1:5000/
+```json
+{"message":"Backend Server is running"}
 ```
 
 ## Frontend Docker Commands
 
-```bash
+```powershell
 cd D:\Theory\FS1\FSD-2
 docker build -f Exp20/frontend.Dockerfile -t testing-frontend .
 docker rm -f testing-frontend-container
@@ -45,33 +46,32 @@ docker run -d --name testing-frontend-container -p 4173:4173 testing-frontend
 docker ps
 ```
 
-Verify frontend:
+Verify frontend in the browser:
 
-```bash
+```text
 http://127.0.0.1:4173/
 ```
 
 ## GitHub Actions Workflow
 
-The active workflow stays at `.github/workflows/ci.yml` because GitHub only runs workflows from that location.
+The active workflow is stored at `.github/workflows/ci.yml` because GitHub only executes workflows from that location.
 
 ### Pipeline Stages
 
-1. `backend-test` runs `pytest` for `Testing/Backend`
-2. `frontend-test` runs `npm test` for `Testing/Frontend`
-3. `docker-publish` builds the backend image and pushes it to `ghcr.io`
-4. `deploy-container` pulls the backend image, runs the container, and verifies the `/` route
+1. `backend-test` installs backend dependencies and runs `pytest`
+2. `frontend-test` installs frontend dependencies and runs `npm test`
+3. `docker-publish` builds the backend image from `Exp20/backend.Dockerfile` and pushes it to `ghcr.io`
+4. `deploy-container` pulls the published backend image, starts a container, and verifies the `/` route
 
-## Submission Screenshots
+## Submission Proof Collected
 
-Capture these screenshots for submission:
-
-- backend Docker image/container proof
-- frontend Docker image/container proof if required by faculty
-- backend response from `http://127.0.0.1:5000/`
-- frontend preview from `http://127.0.0.1:4173/`
-- GitHub Actions workflow success page
-- GitHub package page for published backend image
+- backend container running locally
+- backend response at `http://127.0.0.1:5000/`
+- frontend container running locally
+- frontend preview at `http://127.0.0.1:4173/`
+- GitHub Actions workflow result
+- GitHub Container Registry package page for the backend image
+- Docker images and container screenshots
 
 ## Expected Outcome
 
